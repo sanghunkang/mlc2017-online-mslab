@@ -21,6 +21,8 @@ import utils
 
 import tensorflow.contrib.slim as slim
 
+
+
 class LogisticModel(models.BaseModel):
 	"""Logistic model with L2 regularization."""
 
@@ -44,7 +46,17 @@ class LogisticModel(models.BaseModel):
 
 class SubmissionModel(models.BaseModel):
 	def create_model(self, model_input, num_classes=2, l2_penalty=1e-8, **unused_params):
-		output = None
+		# output = None
+		# net = slim.flatten(model_input)
+		net = model_input
+		net = slim.conv2d(net, 128, [3, 3], scope='conv3_1')
+		net = slim.conv2d(net, 128, [3, 3], scope='conv3_2')
+		net = slim.conv2d(net, 128, [3, 3], scope='conv3_3')
+		net = slim.max_pool2d(net, [2, 2], scope='pool2')
+		net = slim.flatten(net)
+
+		output = slim.fully_connected(net, num_classes - 1, activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty))
+
 		return {"predictions": output}
 
 class MoeModel(models.BaseModel):

@@ -51,7 +51,7 @@ if __name__ == "__main__":
 			" new model instance.")
 
 	# Training flags.
-	flags.DEFINE_integer("batch_size", 512,
+	flags.DEFINE_integer("batch_size", 128,
 											 "How many examples to process per batch for training.")
 	flags.DEFINE_string("label_loss", "CrossEntropyLoss",
 											"Which loss function to use for training the model.")
@@ -406,18 +406,18 @@ class Trainer(object):
 				logging.info("%s: Entering training loop.", task_as_string(self.task))
 				while (not sv.should_stop()) and (not self.max_steps_reached):
 					batch_start_time = time.time()
-					print("___________________________________")
-					print(dir())
-					image = tower_to_show.eval(session=sess)
-					import matplotlib.pyplot as plt
-					import numpy as np
-					print(image[0])
-					img = image[0]+1
-					print(img)
-					plt.imshow(img)
-					plt.show()
-					print()
-					print("___________________________________")
+					# print("___________________________________")
+					# print(dir())
+					# image = tower_to_show.eval(session=sess)
+					# import matplotlib.pyplot as plt
+					# import numpy as np
+					# print(image[0])
+					# img = image[0]+1
+					# print(img)
+					# plt.imshow(img)
+					# plt.show()
+					# print()
+					# print("___________________________________")
 					_, global_step_val, loss_val, predictions_val, labels_val = sess.run(
 							[train_op, global_step, loss, predictions, labels])
 					seconds_per_batch = time.time() - batch_start_time
