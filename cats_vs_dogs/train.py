@@ -60,7 +60,7 @@ if __name__ == "__main__":
 			"How much weight to give to the regularization loss (the label loss has "
 			"a weight of 1).")
 
-	flags.DEFINE_float("base_learning_rate", 0.0001,
+	flags.DEFINE_float("base_learning_rate", 0.00001,
 										 "Which learning rate to start with.")
 
 	flags.DEFINE_float("learning_rate_decay", 0.95,
@@ -426,7 +426,7 @@ class Trainer(object):
 					if self.max_steps and self.max_steps <= global_step_val:
 						self.max_steps_reached = True
 
-					if self.is_master and global_step_val % 10 == 0 and self.train_dir:
+					if self.is_master and global_step_val % 1 == 0 and self.train_dir:
 						eval_start_time = time.time()
 						hit_at_one = eval_util.calculate_hit_at_one(predictions_val, labels_val)
 						perr = eval_util.calculate_precision_at_equal_recall_rate(predictions_val,
