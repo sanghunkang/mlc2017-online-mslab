@@ -5,3 +5,6 @@ cartpole/conf.py
 *.txt
 
 */__pycache__/
+*/data_train/
+*/data_test/
+*/data_validation/

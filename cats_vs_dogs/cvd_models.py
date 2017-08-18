@@ -50,10 +50,10 @@ class SubmissionModel(models.BaseModel):
 		net = model_input
 		print(net.shape)
 
-		net = slim.conv2d(net, 16, [3, 3], scope='conv1_1')
-		net = slim.conv2d(net, 16, [3, 3], scope='conv1_2')
-		net = slim.max_pool2d(net, [2, 2], scope='pool1')
-		print(net.shape)
+		# net = slim.conv2d(net, 16, [3, 3], scope='conv1_1')
+		# net = slim.conv2d(net, 16, [3, 3], scope='conv1_2')
+		# net = slim.max_pool2d(net, [2, 2], scope='pool1')
+		# print(net.shape)
 
 		net = slim.conv2d(net, 32, [3, 3], scope='conv2_1')
 		net = slim.conv2d(net, 32, [3, 3], scope='conv2_2')
