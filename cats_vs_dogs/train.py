@@ -60,7 +60,7 @@ if __name__ == "__main__":
 			"How much weight to give to the regularization loss (the label loss has "
 			"a weight of 1).")
 
-	flags.DEFINE_float("base_learning_rate", 0.00001,
+	flags.DEFINE_float("base_learning_rate", 0.0001,
 										 "Which learning rate to start with.")
 
 	flags.DEFINE_float("learning_rate_decay", 0.95,
@@ -71,14 +71,14 @@ if __name__ == "__main__":
 										 "Multiply current learning rate by learning_rate_decay "
 										 "every learning_rate_decay_examples.")
 
-	flags.DEFINE_integer("num_epochs", 5,
+	flags.DEFINE_integer("num_epochs", 500,
 											 "How many passes to make over the dataset before "
 											 "halting training.")
 
 	flags.DEFINE_integer("max_steps", None,
 											 "The maximum number of iterations of the training loop.")
 
-	flags.DEFINE_integer("export_model_steps", 1000,
+	flags.DEFINE_integer("export_model_steps", 100,
 											 "The period, in number of steps, with which the model "
 											 "is exported for batch prediction.")
 
@@ -409,14 +409,12 @@ class Trainer(object):
 					# print("___________________________________")
 					# print(dir())
 					# image = tower_to_show.eval(session=sess)
+					# img = (image[0] + 1)/2
 					# import matplotlib.pyplot as plt
-					# import numpy as np
-					# print(image[0])
-					# img = image[0]+1
+					# # import numpy as np
 					# print(img)
 					# plt.imshow(img)
 					# plt.show()
-					# print()
 					# print("___________________________________")
 					_, global_step_val, loss_val, predictions_val, labels_val = sess.run(
 							[train_op, global_step, loss, predictions, labels])
