@@ -1,3 +1,5 @@
+*/conf.py
+
 *.log
 *.pyc
 *.txt
