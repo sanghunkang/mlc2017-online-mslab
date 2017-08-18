@@ -32,26 +32,35 @@ class SubmissionModel(BaseModel):
 		net = model_input
 		print(net.shape)
 
-		net = slim.conv2d(net, 32, [3, 3], scope='conv11')
+		net = slim.conv2d(net, 16, [5, 5], scope='conv11')
 		net = tf.nn.relu(net)
-		net = slim.conv2d(net, 32, [3, 3], scope='conv12')
+		net = slim.conv2d(net, 16, [5, 5], scope='conv12')
 		net = tf.nn.relu(net)
 		net = slim.max_pool2d(net, [2, 2], scope='pool1')
 		# net = slim.dropout(net, 0.25, scope='dropout1')
 		print(net.shape)
 
-		net = slim.conv2d(net, 64, [3, 3], scope='conv21')
-		net = tf.nn.relu(net)
-		net = slim.conv2d(net, 64, [3, 3], scope='conv22')
+		net = slim.conv2d(net, 32, [3, 3], scope='conv2')
 		net = tf.nn.relu(net)
 		net = slim.max_pool2d(net, [2, 2], scope='pool2')
+		print(net.shape)
+
+		net = slim.conv2d(net, 32, [3, 3], scope='conv3')
+		net = tf.nn.relu(net)
+		net = slim.max_pool2d(net, [2, 2], scope='pool3')
+		print(net.shape)
+
+		net = slim.conv2d(net, 32, [3, 3], scope='conv4')
+		net = tf.nn.relu(net)
+		net = slim.max_pool2d(net, [2, 2], scope='pool4')
 		print(net.shape)
 		# net = slim.dropout(net, 0.25, scope='dropout2')
 
 		net = slim.flatten(net)
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
 		# net = slim.dropout(net, 0.25, scope='dropout3')
-		net = slim.batch_norm(net, scope='bn1')
+		net = slim.batch_norm(net, scope='bn2')
 		net = slim.fully_connected(net, num_classes, activation_fn=tf.nn.sigmoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
 		return {"predictions": net}
