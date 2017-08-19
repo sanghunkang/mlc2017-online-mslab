@@ -395,14 +395,14 @@ class SubmissionModel(models.BaseModel):
 		# # net = slim.batch_norm(net, scope='bn2')
 		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout2')
 
-		logits, end_points = inception_v1(inputs,
+		logits, end_points = inception_v1(net,
 								 num_classes=1000,
 								 is_training=True,
 								 dropout_keep_prob=0.8,
 								 prediction_fn=slim.softmax,
 								 spatial_squeeze=True,
 								 reuse=None,
-								 scope='InceptionV1'):
+								 scope='InceptionV1')
 
 		net = slim.fully_connected(logits, num_classes - 1, activation_fn=tf.nn.sigmoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
