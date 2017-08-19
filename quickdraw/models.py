@@ -32,8 +32,8 @@ class SubmissionModel(BaseModel):
 		print(unused_params)
 		print(dir())
 		# for k in unused_params.keys: print(k)
-		# is_training=unused_params["is_training"]
-		is_training=True
+		is_training=unused_params["is_training"]
+		# is_training=True
 		print(is_training)
 
 		net = model_input
