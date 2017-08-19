@@ -302,12 +302,12 @@ class SubmissionModel(models.BaseModel):
 		net = model_input
 		print(net.shape)
 
-		# net = slim.conv2d(net, 32, [5, 5], scope='conv11', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		# net = slim.conv2d(net, 32, [3, 3], scope='conv12', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		# net = slim.max_pool2d(net, [2, 2], scope='pool1')
-		# # net = slim.batch_norm(net, scope='bn_conv1')
-		# # net = slim.dropout(net, 0.1, scope='dropout1')
-		# print(net.shape)
+		net = slim.conv2d(net, 32, [5, 5], scope='conv11', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [3, 3], scope='conv12', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.max_pool2d(net, [2, 2], scope='pool1')
+		# net = slim.batch_norm(net, scope='bn_conv1')
+		# net = slim.dropout(net, 0.1, scope='dropout1')
+		print(net.shape)
 
 		net = slim.conv2d(net, 64, [3, 3], scope='conv21', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.conv2d(net, 64, [3, 3], scope='conv22', weights_regularizer=slim.l2_regularizer(l2_penalty))
