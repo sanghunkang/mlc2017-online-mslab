@@ -30,12 +30,16 @@ class SubmissionModel(BaseModel):
 	def create_model(self, model_input, num_classes=10, l2_penalty=1e-8, **unused_params):
 		print("___________________________________________")
 		print(unused_params)
+		net = model_input
 		is_training=unused_params["is_training"]
 		# is_training=True
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv21')
-		net = slim.conv2d(net, 64, [7, 7], scope='conv21', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [7, 7], scope='conv21', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.max_pool2d(net, [2, 2], scope='pool2')
+		print(net.shape)
+
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv22')
-		net = slim.conv2d(net, 64, [7, 7], scope='conv22', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 64, [5, 5], scope='conv22', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool2')
 		# net = slim.dropout(net, 0.5, scope='dropout22')
 
@@ -43,8 +47,11 @@ class SubmissionModel(BaseModel):
 
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv31')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv31', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.max_pool2d(net, [2, 2], scope='pool2')
+		print(net.shape)
+
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv32')
-		net = slim.conv2d(net, 128, [3, 3], scope='conv32', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 256, [3, 3], scope='conv32', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool3')
 		# net = slim.dropout(net, 0.5, scope='dropout32')
 
@@ -76,8 +83,8 @@ class SubmissionModel(BaseModel):
 		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
 		# print(net.shape)
 
-		net = slim.batch_norm(net, is_training=is_training, scope='bn2')
-		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc2')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn2')
+		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc2')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc3')
 		print(net.shape)
 		
