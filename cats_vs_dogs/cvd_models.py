@@ -292,14 +292,14 @@ class LogisticModel(models.BaseModel):
 		return {"predictions": output}
 
 class SubmissionModel(models.BaseModel):
-	def create_model(self, model_input, num_classes=2, l2_penalty=0.001, **unused_params):
+	def create_model(self, model_input, num_classes=2, l2_penalty=0.01, **unused_params):
 		print("___________________________________________")
 		print(unused_params)
 		is_training=unused_params["is_training"]
 		# is_training=True
 		print(is_training)
 
-		net = model_input
+		net = ((model_input+1)/2)
 		print(net.shape)
 
 
@@ -317,18 +317,18 @@ class SubmissionModel(models.BaseModel):
 		# net = tf.concat(axis=3, values=[branch_0, branch_1, branch_2, branch_3])
 
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv11')
-		# net = slim.conv2d(net, 32, [3, 3], scope='conv11', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		# # net = slim.batch_norm(net, is_training=is_training, scope='bn_conv12')
-		# net = slim.conv2d(net, 32, [3, 3], scope='conv12', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		# net = slim.max_pool2d(net, [2, 2], scope='pool1')
+		net = slim.conv2d(net, 32, [7, 7], scope='conv11', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [7, 7], scope='conv12', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.max_pool2d(net, [2, 2], scope='pool1')
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout12')
 		# # net = slim.dropout(net, 0.5, scope='dropout11')
 		
 		# print(net.shape)
 
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv21')
-		net = slim.conv2d(net, 64, [7, 7], scope='conv21', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 64, [3, 3], scope='conv21', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv22')
-		net = slim.conv2d(net, 64, [7, 7], scope='conv22', weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 64, [3,3 ], scope='conv22', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool2')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout22')
 
@@ -369,12 +369,12 @@ class SubmissionModel(models.BaseModel):
 		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
 		# print(net.shape)
 
-		# net = slim.batch_norm(net, is_training=is_training, scope='bn2')
+		net = slim.batch_norm(net, is_training=is_training, scope='bn2')
 		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc2')
-		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc3')
-		# print(net.shape)
+		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc3')
+		print(net.shape)
 		
-		net = slim.batch_norm(net, is_training=is_training, scope='bn3')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn3')
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc3')
 		net = slim.fully_connected(net, num_classes - 1, activation_fn=tf.nn.sigmoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
