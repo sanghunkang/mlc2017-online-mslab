@@ -83,14 +83,14 @@ class SubmissionModel(BaseModel):
 		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
 		# print(net.shape)
 
-		# net = slim.batch_norm(net, is_training=is_training, scope='bn2')
+		net = slim.batch_norm(net, is_training=is_training, scope='bn2')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropoutfc2')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc3')
 		print(net.shape)
 		
-		# net = slim.batch_norm(net, is_training=is_training, scope='bn3')
+		net = slim.batch_norm(net, is_training=is_training, scope='bn3')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropoutfc3')
-		net = slim.fully_connected(net, num_classes, activation_fn=tf.nn.sigmoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
+		net = slim.fully_connected(net, num_classes, activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
 		return {"predictions": net}
 
