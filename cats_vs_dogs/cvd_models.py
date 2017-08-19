@@ -396,8 +396,8 @@ class SubmissionModel(models.BaseModel):
 		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout2')
 
 		logits, end_points = inception_v1(net,
-								 num_classes=1000,
-								 is_training=True,
+								 num_classes=2,
+								 is_training=is_training,
 								 dropout_keep_prob=0.8,
 								 prediction_fn=slim.softmax,
 								 spatial_squeeze=True,
