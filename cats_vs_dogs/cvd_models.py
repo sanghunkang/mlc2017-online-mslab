@@ -302,27 +302,27 @@ class SubmissionModel(models.BaseModel):
 		net = model_input
 		print(net.shape)
 
-		net = slim.batch_norm(net, is_training=is_training, scope='bn_conv11')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv11')
 		net = slim.conv2d(net, 32, [3, 3], scope='conv11', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.batch_norm(net, is_training=is_training, scope='bn_conv12')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv12')
 		net = slim.conv2d(net, 32, [3, 3], scope='conv12', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool1')
 		# net = slim.dropout(net, 0.5, scope='dropout11')
 		
 		print(net.shape)
 
-		net = slim.batch_norm(net, is_training=is_training, scope='bn_conv21')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv21')
 		net = slim.conv2d(net, 64, [3, 3], scope='conv21', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.batch_norm(net, is_training=is_training, scope='bn_conv22')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv22')
 		net = slim.conv2d(net, 64, [3, 3], scope='conv22', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool2')
 		# net = slim.dropout(net, 0.5, scope='dropout22')
 
 		print(net.shape)
 
-		net = slim.batch_norm(net, is_training=is_training, scope='bn_conv31')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv31')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv31', weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.batch_norm(net, is_training=is_training, scope='bn_conv32')
+		# net = slim.batch_norm(net, is_training=is_training, scope='bn_conv32')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv32', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool3')
 		# net = slim.dropout(net, 0.5, scope='dropout32')
@@ -348,12 +348,20 @@ class SubmissionModel(models.BaseModel):
 		# print(net.shape)
 
 		net = slim.flatten(net)
+		print(net.shape)
+
 		net = slim.batch_norm(net, is_training=is_training, scope='bn1')
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc1')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
-		
+		print(net.shape)
+
 		net = slim.batch_norm(net, is_training=is_training, scope='bn2')
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc2')
+		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc3')
+		print(net.shape)
+		
+		net = slim.batch_norm(net, is_training=is_training, scope='bn3')
+		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropoutfc3')
 		net = slim.fully_connected(net, num_classes - 1, activation_fn=tf.nn.sigmoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
 		return {"predictions": net}
