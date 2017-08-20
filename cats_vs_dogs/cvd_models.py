@@ -292,7 +292,7 @@ class LogisticModel(models.BaseModel):
 		return {"predictions": output}
 
 class SubmissionModel(models.BaseModel):
-	def create_model(self, model_input, num_classes=2, l2_penalty=0.0001, **unused_params):
+	def create_model(self, model_input, num_classes=2, l2_penalty=10e-8, **unused_params):
 		print("___________________________________________")
 		print(unused_params)
 		is_training=unused_params["is_training"]
@@ -304,29 +304,29 @@ class SubmissionModel(models.BaseModel):
 		net = model_input
 		print(net.shape)
 
-		# net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		# net = slim.max_pool2d(net, [2, 2], scope='pool11')
-		# print(net.shape)
+		net = slim.conv2d(net, 64, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.max_pool2d(net, [2, 2], scope='pool11')
+		print(net.shape)
 
-		net = slim.conv2d(net, 64, [3, 3], scope='conv12')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 128, [3, 3], scope='conv12')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool12')
 		print(net.shape)
 
-		net = slim.conv2d(net, 128, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 256, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool21')
 		print(net.shape)
 
-		net = slim.conv2d(net, 256, [3, 3], scope='conv22')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 512, [3, 3], scope='conv22')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool22')
 		print(net.shape)
 
-		net = slim.conv2d(net, 512, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [2, 2], scope='pool31')
-		print(net.shape)
+		# net = slim.conv2d(net, 512, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# net = slim.max_pool2d(net, [3, 3], scope='pool31')
+		# print(net.shape)
 
-		net = slim.conv2d(net, 1024, [3, 3], scope='conv32')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [2, 2], scope='pool32')
-		print(net.shape)
+		# net = slim.conv2d(net, 128, [3, 3], scope='conv32')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# net = slim.max_pool2d(net, [2, 2], scope='pool32')
+		# print(net.shape)
 
 		# net = slim.conv2d(net, 256, [3, 3], scope='conv41', weights_regularizer=slim.l2_regularizer(l2_penalty))
 		# net = slim.conv2d(net, 256, [3, 3], scope='conv42', weights_regularizer=slim.l2_regularizer(l2_penalty))
