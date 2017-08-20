@@ -317,11 +317,11 @@ class SubmissionModel(models.BaseModel):
 		net = slim.max_pool2d(net, [2, 2], scope='pool31')
 		print(net.shape)
 
-		net = slim.conv2d(net, 128, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool41')
 		print(net.shape)
 
-		net = slim.conv2d(net, 128, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool51')
 		print(net.shape)
 
