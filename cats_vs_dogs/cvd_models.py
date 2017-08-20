@@ -305,7 +305,7 @@ class SubmissionModel(models.BaseModel):
 		print(net.shape)
 
 		# net = slim.batch_norm(net, scope='bn_conv1')
-		net = slim.conv2d(net, 32, [5, 5], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [7, 7], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		# net = slim.conv2d(net, 32, [3, 3], scope='conv12')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		# net = slim.dropout(net, 0.5, scope='dropout1')
@@ -319,7 +319,7 @@ class SubmissionModel(models.BaseModel):
 		print(net.shape)
 
 		# net = slim.batch_norm(net, scope='bn_conv3')
-		net = slim.conv2d(net, 128, [5, 5], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		# net = slim.conv2d(net, 128, [3, 3], scope='conv32')
 		net = slim.max_pool2d(net, [2, 2], scope='pool3')
 		# net = slim.dropout(net, 0.5, scope='dropout3')

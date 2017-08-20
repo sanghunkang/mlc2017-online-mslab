@@ -39,8 +39,8 @@ class SubmissionModel(BaseModel):
 		net = model_input
 		print(net.shape)
 
-		net = slim.conv2d(net, 32, [5, 5], scope='conv11')
-		net = slim.conv2d(net, 32, [3, 3], scope='conv12')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [7, 7], scope='conv11')
+		# net = slim.conv2d(net, 32, [3, 3], scope='conv12')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		print(net.shape)
 
