@@ -320,14 +320,14 @@ class SubmissionModel(models.BaseModel):
 		net = slim.max_pool2d(net, [2, 2], scope='pool3')
 		print(net.shape)
 
-		net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.conv2d(net, 256, [3, 3], scope='conv42')
-		net = slim.max_pool2d(net, [2, 2], scope='pool4')
-		print(net.shape)
+		# net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# net = slim.conv2d(net, 256, [3, 3], scope='conv42')
+		# net = slim.max_pool2d(net, [2, 2], scope='pool4')
+		# print(net.shape)
 
-		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.conv2d(net, 512, [3, 3], scope='conv52')
-		net = slim.max_pool2d(net, [3, 3], scope='pool5')
+		# net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# net = slim.conv2d(net, 512, [3, 3], scope='conv52')
+		# net = slim.max_pool2d(net, [3, 3], scope='pool5')
 
 		net = slim.flatten(net)
 		# net = slim.batch_norm(net, scope='bn1')
