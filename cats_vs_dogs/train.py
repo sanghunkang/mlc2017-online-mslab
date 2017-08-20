@@ -78,7 +78,7 @@ if __name__ == "__main__":
 	flags.DEFINE_integer("max_steps", None,
 											 "The maximum number of iterations of the training loop.")
 
-	flags.DEFINE_integer("export_model_steps", 250,
+	flags.DEFINE_integer("export_model_steps", 100,
 											 "The period, in number of steps, with which the model "
 											 "is exported for batch prediction.")
 
