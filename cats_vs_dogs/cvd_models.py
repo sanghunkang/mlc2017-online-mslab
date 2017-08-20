@@ -292,7 +292,7 @@ class LogisticModel(models.BaseModel):
 		return {"predictions": output}
 
 class SubmissionModel(models.BaseModel):
-	def create_model(self, model_input, num_classes=2, l2_penalty=0.001, **unused_params):
+	def create_model(self, model_input, num_classes=2, l2_penalty=10e-8, **unused_params):
 		print("___________________________________________")
 		print(unused_params)
 		is_training=unused_params["is_training"]
@@ -326,11 +326,11 @@ class SubmissionModel(models.BaseModel):
 		print(net.shape)
 
 		# net = slim.batch_norm(net, scope='bn_conv4')
-		net = slim.conv2d(net, 256, [5, 5], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		# net = slim.conv2d(net, 256, [3, 3], scope='conv44')
-		net = slim.max_pool2d(net, [4, 4], scope='pool4')
-		# net = slim.dropout(net, 0.5, scope='dropout4')
-		print(net.shape)
+		# net = slim.conv2d(net, 256, [5, 5], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# # net = slim.conv2d(net, 256, [3, 3], scope='conv44')
+		# net = slim.max_pool2d(net, [4, 4], scope='pool4')
+		# # net = slim.dropout(net, 0.5, scope='dropout4')
+		# print(net.shape)
 
 		# net = slim.batch_norm(net, scope='bn_conv5')
 		# net = slim.conv2d(net, 512, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
