@@ -39,22 +39,27 @@ class SubmissionModel(BaseModel):
 		net = model_input
 		print(net.shape)
 
-		net = slim.conv2d(net, 32, [7, 7], scope='conv11')
+		net = slim.batch_norm(net, scope='bn1')
+		net = slim.conv2d(net, 32, [3, 3], scope='conv11')
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		print(net.shape)
 
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.conv2d(net, 64, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool21')
 		print(net.shape)
 
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool31')
 		print(net.shape)
 
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool41')
 		print(net.shape)
 
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [3, 3], scope='pool51')
 		print(net.shape)
@@ -63,10 +68,11 @@ class SubmissionModel(BaseModel):
 		# net = slim.batch_norm(net, scope='bn1')
 		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
 		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
-
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout1')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
 		# net = slim.batch_norm(net, scope='bn2')
+		net = slim.batch_norm(net, scope='bn1')
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout2')
 		net = slim.fully_connected(net, num_classes, activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
