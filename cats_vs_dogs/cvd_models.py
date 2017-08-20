@@ -334,7 +334,7 @@ class SubmissionModel(models.BaseModel):
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
 		# net = slim.batch_norm(net, scope='bn2')
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout2')
-		net = slim.fully_connected(net, num_classes-1, activation_fn=tf.nn.simoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
+		net = slim.fully_connected(net, num_classes-1, activation_fn=tf.nn.sigmoid, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc2')
 		print("___________________________________________")
 		return {"predictions": net}
 
