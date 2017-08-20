@@ -40,23 +40,28 @@ class SubmissionModel(BaseModel):
 		print(net.shape)
 
 		net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [2, 2], scope='pool11')
+		net = slim.conv2d(net, 32, [3, 3], scope='conv12')
+		net = slim.max_pool2d(net, [2, 2], scope='pool1')
 		print(net.shape)
 
-		net = slim.conv2d(net, 64, [3, 3], scope='conv12')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [2, 2], scope='pool12')
+		net = slim.conv2d(net, 64, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 64, [3, 3], scope='conv22')
+		net = slim.max_pool2d(net, [2, 2], scope='pool2')
 		print(net.shape)
 
-		net = slim.conv2d(net, 128, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [2, 2], scope='pool21')
+		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 128, [3, 3], scope='conv32')
+		net = slim.max_pool2d(net, [2, 2], scope='pool3')
 		print(net.shape)
 
-		net = slim.conv2d(net, 256, [3, 3], scope='conv22')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [2, 2], scope='pool22')
+		net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 256, [3, 3], scope='conv42')
+		net = slim.max_pool2d(net, [2, 2], scope='pool4')
 		print(net.shape)
 
-		net = slim.conv2d(net, 512, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.max_pool2d(net, [3, 3], scope='pool31')
+		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 512, [3, 3], scope='conv52')
+		net = slim.max_pool2d(net, [3, 3], scope='pool5')
 		print(net.shape)
 
 		# net = slim.conv2d(net, 128, [3, 3], scope='conv32')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
@@ -79,8 +84,8 @@ class SubmissionModel(BaseModel):
 
 		net = slim.flatten(net)
 		# net = slim.batch_norm(net, scope='bn1')
-		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
-		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
+		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
+		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
 
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout1')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
