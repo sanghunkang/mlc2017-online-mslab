@@ -39,15 +39,7 @@ class SubmissionModel(BaseModel):
 		net = model_input
 		print(net.shape)
 
-		b1 = slim.conv2d(net, 16, [1, 1], scope='conv11_1')
-
-		b3 = slim.conv2d(net, 32, [1, 1], scope='conv11_3')
-		b3 = slim.conv2d(net, 32, [3, 3], scope='conv11_3')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		
-		b5 = slim.conv2d(net, 16, [1, 1], scope='conv11_5')
-		b5 = slim.conv2d(net, 16, [5, 5], scope='conv11_5')
-		net = tf.concat(axis=3, values=[b5, b3, b1])
-
+		net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		print(net.shape)
 
