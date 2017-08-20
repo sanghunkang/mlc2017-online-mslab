@@ -44,22 +44,22 @@ class SubmissionModel(BaseModel):
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		print(net.shape)
 
-		net = slim.batch_norm(net, scope='bn1')
+		net = slim.batch_norm(net, scope='bn2')
 		net = slim.conv2d(net, 64, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool21')
 		print(net.shape)
 
-		net = slim.batch_norm(net, scope='bn1')
+		net = slim.batch_norm(net, scope='bn3')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool31')
 		print(net.shape)
 
-		net = slim.batch_norm(net, scope='bn1')
+		net = slim.batch_norm(net, scope='bn4')
 		net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool41')
 		print(net.shape)
 
-		net = slim.batch_norm(net, scope='bn1')
+		net = slim.batch_norm(net, scope='bn5')
 		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [3, 3], scope='pool51')
 		print(net.shape)
