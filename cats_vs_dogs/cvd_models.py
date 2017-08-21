@@ -305,12 +305,12 @@ class SubmissionModel(models.BaseModel):
 		print(net.shape)
 
 
-		net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [5, 5], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv11')
 		print(net.shape)
 
-		net = slim.conv2d(net, 64, [3, 3], scope='conv12')
+		net = slim.conv2d(net, 64, [5, 5], scope='conv12')
 		net = slim.max_pool2d(net, [2, 2], scope='pool12')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv12')
 		print(net.shape)
@@ -341,8 +341,8 @@ class SubmissionModel(models.BaseModel):
 
 		net = slim.flatten(net)
 		# net = slim.batch_norm(net, scope='bn1')
-		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
-		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
+		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
+		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
 
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout1')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')
