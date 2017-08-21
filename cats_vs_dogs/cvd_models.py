@@ -307,7 +307,7 @@ class SubmissionModel(models.BaseModel):
 
 		net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		net = slim.conv2d(net, 32, [3, 3], scope='conv12')
-		net = slim.max_pool2d(net, [2, 2], scope='pool1')
+		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv1')
 		print(net.shape)
 
