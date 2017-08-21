@@ -306,21 +306,25 @@ class SubmissionModel(models.BaseModel):
 
 
 		net = slim.conv2d(net, 32, [5, 5], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 32, [5, 5], scope='conv12')
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv11')
 		print(net.shape)
 
-		net = slim.conv2d(net, 64, [5, 5], scope='conv12')
+		net = slim.conv2d(net, 64, [5, 5], scope='conv21')
+		net = slim.conv2d(net, 64, [5, 5], scope='conv22')
 		net = slim.max_pool2d(net, [2, 2], scope='pool12')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv12')
 		print(net.shape)
 
-		net = slim.conv2d(net, 128, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.conv2d(net, 128, [3, 3], scope='conv32')
 		net = slim.max_pool2d(net, [2, 2], scope='pool21')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv21')
 		print(net.shape)
 
-		net = slim.conv2d(net, 256, [3, 3], scope='conv22')
+		net = slim.conv2d(net, 256, [3, 3], scope='conv41')
+		net = slim.conv2d(net, 256, [3, 3], scope='conv42')
 		net = slim.max_pool2d(net, [2, 2], scope='pool22')
 		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv22')
 		print(net.shape)
@@ -335,10 +339,10 @@ class SubmissionModel(models.BaseModel):
 		# net = slim.max_pool2d(net, [2, 2], scope='pool4')
 		# print(net.shape)
 
-		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.conv2d(net, 512, [3, 3], scope='conv52')
-		net = slim.max_pool2d(net, [2, 2], scope='pool5')
-		print(net.shape)
+		# net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# net = slim.conv2d(net, 512, [3, 3], scope='conv52')
+		# net = slim.max_pool2d(net, [2, 2], scope='pool5')
+		# print(net.shape)
 
 		net = slim.flatten(net)
 		net = slim.batch_norm(net, scope='bn0')
