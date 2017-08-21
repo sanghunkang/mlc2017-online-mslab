@@ -39,40 +39,65 @@ class SubmissionModel(BaseModel):
 		net = model_input
 		print(net.shape)
 
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv11')
-		net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv12')
-		net = slim.conv2d(net, 32, [3, 3], scope='conv12')
+		# net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv11')
+		# net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		# net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv12')
+		# net = slim.conv2d(net, 32, [3, 3], scope='conv12')
+		b5 = slim.conv2d(net, 16, [1, 1], scope='conv1b51r')
+		b5 = slim.conv2d(net, 16, [5, 5], scope='conv1b5')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		
+		b3 = slim.conv2d(net, 32, [1, 1], scope='conv1b31r')
+		b3 = slim.conv2d(net, 32, [3, 3], scope='conv1b3')
+		
+		b1 = slim.conv2d(net, 16, [1, 1], scope='conv1b1')
+		net = tf.concat(axis=3, values=[b1, b3, b5])
+
 		net = slim.max_pool2d(net, [2, 2], scope='pool1')
 		print(net.shape)
 
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv21')
-		net = slim.conv2d(net, 64, [3, 3], scope='conv21')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv22')
-		net = slim.conv2d(net, 64, [3, 3], scope='conv22')
+		b5 = slim.conv2d(net, 32, [1, 1], scope='conv2b51r')
+		b5 = slim.conv2d(net, 32, [5, 5], scope='conv2b5')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		
+		b3 = slim.conv2d(net, 64, [1, 1], scope='conv2b31r')
+		b3 = slim.conv2d(net, 64, [3, 3], scope='conv2b3')
+		
+		b1 = slim.conv2d(net, 32, [1, 1], scope='conv2b1')
+		net = tf.concat(axis=3, values=[b1, b3, b5])
 		net = slim.max_pool2d(net, [2, 2], scope='pool2')
 		print(net.shape)
 
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv31')
-		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv32')
-		net = slim.conv2d(net, 128, [3, 3], scope='conv32')
+		b5 = slim.conv2d(net, 64, [1, 1], scope='conv3b51r')
+		b5 = slim.conv2d(net, 64, [5, 5], scope='conv3b5')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		
+		b3 = slim.conv2d(net, 128, [1, 1], scope='conv3b31r')
+		b3 = slim.conv2d(net, 128, [3, 3], scope='conv3b3')
+		
+		b1 = slim.conv2d(net, 64, [1, 1], scope='conv3b1')
+		net = tf.concat(axis=3, values=[b1, b3, b5])
 		net = slim.max_pool2d(net, [2, 2], scope='pool3')
 		print(net.shape)
 
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv41')
-		net = slim.conv2d(net, 256, [3, 3], scope='conv41')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv42')
-		net = slim.conv2d(net, 256, [3, 3], scope='conv42')
+		b5 = slim.conv2d(net, 128, [1, 1], scope='conv4b51r')
+		b5 = slim.conv2d(net, 128, [5, 5], scope='conv4b5')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		
+		b3 = slim.conv2d(net, 256, [1, 1], scope='conv4b31r')
+		b3 = slim.conv2d(net, 256, [3, 3], scope='conv4b3')
+		
+		b1 = slim.conv2d(net, 128, [1, 1], scope='conv4b1')
+		net = tf.concat(axis=3, values=[b1, b3, b5])
 		net = slim.max_pool2d(net, [2, 2], scope='pool4')
 		print(net.shape)
 
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv51')
-		net = slim.conv2d(net, 512, [3, 3], scope='conv51')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv52')
-		net = slim.conv2d(net, 512, [3, 3], scope='conv52')
-		net = slim.max_pool2d(net, [3, 3], scope='pool5')
-		print(net.shape)
+		# b5 = slim.conv2d(net, 16, [1, 1], scope='conv1b1r')
+		# b5 = slim.conv2d(net, 16, [5, 5], scope='conv1b5')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		
+		# b3 = slim.conv2d(net, 32, [1, 1], scope='conv1b1r')
+		# b3 = slim.conv2d(net, 32, [3, 3], scope='conv1b3')
+		
+		# b1 = slim.conv2d(net, 16, [1, 1], scope='conv1b1')
+		# net = tf.concat(axis=3, values=[b1, b3, b5])
+		# net = slim.max_pool2d(net, [3, 3], scope='pool5')
+		# print(net.shape)
 
 		# net = slim.conv2d(net, 128, [3, 3], scope='conv32')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
 		# net = slim.max_pool2d(net, [2, 2], scope='pool32')
