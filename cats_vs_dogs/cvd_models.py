@@ -304,29 +304,32 @@ class SubmissionModel(models.BaseModel):
 		net = model_input
 		print(net.shape)
 
-
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv11')
 		net = slim.conv2d(net, 32, [3, 3], scope='conv11')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv12')
 		net = slim.conv2d(net, 32, [3, 3], scope='conv12')
 		net = slim.max_pool2d(net, [2, 2], scope='pool11')
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv1')
 		print(net.shape)
 
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv21')
 		net = slim.conv2d(net, 64, [3, 3], scope='conv21')
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv22')
 		net = slim.conv2d(net, 64, [3, 3], scope='conv22')
 		net = slim.max_pool2d(net, [2, 2], scope='pool2')
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv2')
 		print(net.shape)
 
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv31')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv32')
 		net = slim.conv2d(net, 128, [3, 3], scope='conv32')
 		net = slim.max_pool2d(net, [2, 2], scope='pool3')
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv3')
 		print(net.shape)
 
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv41')
 		net = slim.conv2d(net, 256, [3, 3], scope='conv41')
+		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv42')
 		net = slim.conv2d(net, 256, [3, 3], scope='conv42')
 		net = slim.max_pool2d(net, [2, 2], scope='pool4')
-		net = slim.dropout(net, 0.75, is_training=is_training, scope='dropout_conv4')
 		print(net.shape)
 
 		# # net = slim.conv2d(net, 128, [3, 3], scope='conv31')#, weights_regularizer=slim.l2_regularizer(l2_penalty))
