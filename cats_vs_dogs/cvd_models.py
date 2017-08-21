@@ -292,7 +292,7 @@ class LogisticModel(models.BaseModel):
 		return {"predictions": output}
 
 class SubmissionModel(models.BaseModel):
-	def create_model(self, model_input, num_classes=2, l2_penalty=0.001, **unused_params):
+	def create_model(self, model_input, num_classes=2, l2_penalty=10e-6, **unused_params):
 		print("___________________________________________")
 		print(unused_params)
 		is_training=unused_params["is_training"]
@@ -341,8 +341,8 @@ class SubmissionModel(models.BaseModel):
 
 		net = slim.flatten(net)
 		# net = slim.batch_norm(net, scope='bn1')
-		# net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
-		# net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
+		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout0')
+		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc0')
 
 		net = slim.dropout(net, 0.5, is_training=is_training, scope='dropout1')
 		net = slim.fully_connected(net, int(net.shape[-1]), activation_fn=tf.nn.relu, weights_regularizer=slim.l2_regularizer(l2_penalty), scope='fc1')

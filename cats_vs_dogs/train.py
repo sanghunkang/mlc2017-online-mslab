@@ -51,7 +51,7 @@ if __name__ == "__main__":
 			" new model instance.")
 
 	# Training flags.
-	flags.DEFINE_integer("batch_size", 128,
+	flags.DEFINE_integer("batch_size", 512,
 											 "How many examples to process per batch for training.")
 	flags.DEFINE_string("label_loss", "CrossEntropyLoss",
 											"Which loss function to use for training the model.")
@@ -60,7 +60,7 @@ if __name__ == "__main__":
 			"How much weight to give to the regularization loss (the label loss has "
 			"a weight of 1).")
 
-	flags.DEFINE_float("base_learning_rate", 0.0001,
+	flags.DEFINE_float("base_learning_rate", 0.001,
 										 "Which learning rate to start with.")
 
 	flags.DEFINE_float("learning_rate_decay", 0.95,
